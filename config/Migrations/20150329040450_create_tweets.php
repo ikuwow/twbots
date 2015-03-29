@@ -13,16 +13,10 @@ class CreateTweets extends AbstractMigration
     public function change()
     {
         $table = $this->table('tweets');
-        /*
-        $table->addColumn('id', 'integer', [
-            'default' => null,
-            'limit' => 11,
-            'null' => false,
-        ]);
-         */
+        // id is automatically added
         $table->addColumn('account_id', 'integer', [
             'default' => null,
-            'limit' => 255,
+            'limit' => 11,
             'null' => false,
         ]);
         $table->addColumn('content', 'string', [
@@ -43,14 +37,7 @@ class CreateTweets extends AbstractMigration
             'default' => null,
             'null' => false,
         ]);
-        /*
-        $table->addIndex(["
-        'id',
-    "], [
-            'name' => 'PRIMARY',
-            'unique' => true,
-        ]);
-         */
+        $table->addForeignKey('account_id', 'accounts', 'id');
         $table->create();
     }
 }

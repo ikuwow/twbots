@@ -13,16 +13,10 @@ class CreateAccounts extends AbstractMigration
     public function change()
     {
         $table = $this->table('accounts');
-        /*
-        $table->addColumn('id', 'integer', [
+        // id is automatically added
+        $table->addColumn('user_id', 'integer', [
             'default' => null,
             'limit' => 11,
-            'null' => false,
-        ]);
-         */
-        $table->addColumn('user_id', 'string', [
-            'default' => null,
-            'limit' => 255,
             'null' => false,
         ]);
         $table->addColumn('consumer_key', 'string', [
@@ -53,14 +47,7 @@ class CreateAccounts extends AbstractMigration
             'default' => null,
             'null' => false,
         ]);
-            /*
-        $table->addIndex(["
-        'id',
-    "], [
-            'name' => 'PRIMARY',
-            'unique' => true,
-        ]);
-             */
+        $table->addForeignKey('user_id', 'users', 'id');
         $table->create();
     }
 }
